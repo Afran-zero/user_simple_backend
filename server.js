@@ -16,12 +16,9 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Connect to MongoDB
-
-const DATABASE_URI = process.env.DATABASE;
-
-mongoose.connect(DATABASE_URI)
-  .then(() => console.log('MongoDB connected'))
-  .catch((err) => console.log('MongoDB connection error:', err));
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("MongoDB connected"))
+  .catch(err => console.log(err));
 
 // Routes
 app.use('/api', authRoutes);
